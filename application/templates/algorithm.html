@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body_content %}
+    <p>A list of current algorithms in the database</p>
+    {% for algorithm in algorithms %}
+         <div>
+            <h2>{{ algorithm.algorithm_name }}</h2>
+            <p><b>Movement type:</b> {{ algorithm.movement_type }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

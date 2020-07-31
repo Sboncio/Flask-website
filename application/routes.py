@@ -13,6 +13,12 @@ def robot():
     robotData = Robots.query.all()
     return render_template('robot.html',title='Robot',robots=robotData)
 
+@app.route('/algorithms')
+def algorithm():
+    algorithmData = Algorithms.query.all()
+    return render_template('algorithm.html',title='Algorithm',algorithms=algorithmData)
+
+
 @app.route('/add_robot', methods=['GET','POST'])
 def addRobot():
     form = RobotForm()
