@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+    <div class='form'>
+        <form method='POST' action=''>
+            {{ form.hidden_tag() }}
+            {{ form.model_name.label }}
+            {{ form.model_name }}
+            {% if form.model_name.errors %}
+                {% for error in form.model_name.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+            <br>
+            {{ form.drive_type.label }}
+            {{ form.drive_type }}
+            {% if form.drive_type.errors %}
+                {% for error in form.drive_type.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+            <br>
+            {{ form.height.label }}
+            {{ form.height }}
+            {% if form.height.errors %}
+                {% for error in form.height.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+            <br>
+            {{ form.width.label }}
+            {{ form.width }}
+            {% if form.width.errors %}
+                {% for error in form.width.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+            <br>
+            {{ form.length.label }}
+            {{ form.length }}
+            {% if form.length.errors %}
+                {% for error in form.length.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+            <br>
+            {{ form.submit }}
+        </form>
+    </div>
+
+{% endblock %}
