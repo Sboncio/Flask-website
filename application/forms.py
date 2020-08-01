@@ -33,7 +33,8 @@ class AlgorithmForm(FlaskForm):
     
     movement_type = StringField('Movement Type',
         validators = [
-            DataRequired()
+            DataRequired(),
             Length(min=2, max=50)
         ]
     )
+    submit = SubmitField('Add!')
