@@ -12,3 +12,13 @@ class Robots(db.Model):
         return ''.join([
             'Robot id: ', self.id,' Model_name: ', self.model_name, '\r\n',
             'Drive type: ', self.drive_type])
+
+class Algorithms(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    algorithm_name = db.Column(db.String(50), nullable=False, unique=True)
+    movement_type = db.Column(db.String(50))
+
+    def __repr__(self):
+        return ''.join([
+            'Algorithm name: ', self.algorithm_name, '\r\n',
+            'Movement type: ', self.movement_type])

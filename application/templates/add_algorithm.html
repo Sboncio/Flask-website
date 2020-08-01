@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body_content %}
+    <div class="form">
+        <form method='POST' action=''>
+            {{ form.hidden_tag() }}
+            {{ form.algorithm_name.label }}
+            {{ form.algorithm_name }}
+            {% if form.algorithm_name.errors %}
+                <div class="error">
+                    {% for error in form.algorithm_name.errors %}
+                        <span>{{ error }} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>
+            {{ form.movement_type.label }}
+            {{ form.movement_type }}
+            {% if form.movement_type.errors %}
+                <div class="error">
+                    {% for error in form.movement_type.errors %}
+                        <span>{{ error }} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>
+            {{ form.submit }}        
+        </form>
+    </div>
+{% endblock %}

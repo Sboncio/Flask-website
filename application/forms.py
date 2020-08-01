@@ -22,3 +22,19 @@ class RobotForm(FlaskForm):
     length = IntegerField('Length(mm)')
 
     submit = SubmitField('Add!')
+
+class AlgorithmForm(FlaskForm):
+    algorithm_name = StringField('Algorithm name',
+        validators = [
+            DataRequired(),
+            Length(min=2,max=50)
+        ]
+    )
+    
+    movement_type = StringField('Movement Type',
+        validators = [
+            DataRequired(),
+            Length(min=2, max=50)
+        ]
+    )
+    submit = SubmitField('Add!')
