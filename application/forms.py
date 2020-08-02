@@ -97,7 +97,12 @@ class AlgorithmForm(FlaskForm):
 
 class ResultForm(FlaskForm):
     robot_id = SelectField()
-    algorithm_id = SelectField()    
+    algorithm_id = SelectField()
+    time_taken = IntegerField('Time taken(s)',
+        validators=[
+            DataRequired()
+        ]
+    )   
     submit = SubmitField('Add!')
     def __init__(self):
         super(ResultForm, self).__init__()

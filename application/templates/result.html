@@ -5,6 +5,8 @@
          <div>
             <h3>Model Name: {{ result.robot.model_name }}</h3>
             <h3>Algorithm Name: {{ result.algorithm.algorithm_name }} </h3>
+            <h4>Time Taken: {{ result.time_taken }} seconds </h4>
+            <h5>Recorded by: {{result.author.first_name}} {{result.author.last_name}}</h5>
             <p>---------------------------------------------------</p>
         </div>
     {% endfor %}

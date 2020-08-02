@@ -12,6 +12,7 @@ class Users(db.Model, UserMixin):
     last_name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(500), nullable=False, unique=True)
     password = db.Column(db.String(500), nullable=False)
+    userresult = db.relationship('Results',backref='author',lazy=True)    
 
     def __repr__(self):
         return ''.join(['UserID: ',str(self.id),'\r\n','Email: ', self.email])
@@ -47,4 +48,4 @@ class Results(db.Model):
     robot_id = db.Column(db.Integer, db.ForeignKey('robots.id'), nullable=False)
     algorithm_id = db.Column(db.Integer, db.ForeignKey('algorithms.id'), nullable=False)
     time_taken = db.Column(db.Integer, nullable=False)
-    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

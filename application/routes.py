@@ -32,8 +32,9 @@ def addResult():
         resultData = Results(
             robot_id = form.robot_id.data,
             algorithm_id = form.algorithm_id.data,
-            time_taken = form.time_taken.data
-        )
+            time_taken = form.time_taken.data,
+            author = current_user
+       )
 
         db.session.add(resultData)
         db.session.commit()
