@@ -7,10 +7,12 @@
         <h1>{{title}}</h1>
         <a href="{{url_for('home')}}">Home</a>
         <a href="{{url_for('robot')}}">Robots</a>
-        <a href="{{url_for('addRobot')}}">Add Robot</a>
         <a href="{{url_for('algorithm')}}">Algorithms</a>
-        <a href="{{url_for('addAlgorithm')}}">Add Algorithm</a>
+        <a href="{{url_for('result')}}">Results</a>
         {% if current_user.is_authenticated %}
+            <a href="{{url_for('addAlgorithm')}}">Add Algorithm</a>
+            <a href="{{url_for('addRobot')}}">Add Robot</a>
+            <a href="{{url_for('addResult')}}">Add Result</a>
             <a href="{{url_for('logout')}}">Logout</a>
         {% else %}
             <a href="{{url_for('register')}}">Register</a>
