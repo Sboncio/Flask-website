@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, PasswordField, BooleanField
+from wtforms import StringField, SubmitField, IntegerField, PasswordField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from application.models import Users
+from application.models import Users, Robots, Algorithms, Results
 
 class RegistrationForm(FlaskForm):
      first_name = StringField('First Name',
@@ -94,3 +94,12 @@ class AlgorithmForm(FlaskForm):
         ]
     )
     submit = SubmitField('Add!')
+
+class ResultForm(FlaskForm):
+    robot_id = SelectField()
+    algorithm_id = SelectField()    
+    submit = SubmitField('Add!')
+    def __init__(self):
+        super(ResultForm, self).__init__()
+        self.robot_id.choices = [(g.id, g.model_name) for g in Robots.query.all()]
+        self.algorithm_id.choices = [(g.id, g.algorithm_name) for g in Algorithms.query.all()]      

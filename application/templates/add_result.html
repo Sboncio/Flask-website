@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body_content %}
+    <div class="form">
+        <form method='POST' action=''>
+            {{ form.hidden_tag() }}
+            {{ form.robot_id.label }}
+            {{ form.robot_id }}
+            {% if form.robot_id.errors %}
+                <div class="error">
+                    {% for error in form.robot_id.errors %}
+                        <span>{{ error }} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>
+            {{ form.algorithm_id.label }}
+            {{ form.algorithm_id }}
+            {% if form.algorithm_id.errors %}
+                <div class="error">
+                    {% for error in form.algorithm_id.errors %}
+                        <span>{{ error }} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>
+            {{ form.time_taken.label }}
+            {{ form.time_taken }}
+            {% if form.time_taken.errors %}
+                <div class="error">
+                    {% for error in form.time_taken.errors %}
+                        <span>{{ error }} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <br>
+            {{ form.submit }}        
+        </form>
+    </div>
+{% endblock %}

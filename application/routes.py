@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
-from application.models import Robots, Algorithms, Users
-from application.forms import RobotForm, AlgorithmForm, RegistrationForm, LoginForm
+from application.models import Robots, Algorithms, Users, Results
+from application.forms import RobotForm, AlgorithmForm, RegistrationForm, LoginForm, ResultForm
 from flask_login import login_user, current_user,logout_user, login_required
 
 @app.route('/')
@@ -18,6 +18,30 @@ def robot():
 def algorithm():
     algorithmData = Algorithms.query.all()
     return render_template('algorithm.html',title='Algorithm',algorithms=algorithmData)
+
+@app.route('/results')
+def result():
+    resultData = Results.query.all()
+    return render_template('result.html',title='Results',results=resultData)
+
+@app.route('/add_result',methods=['GET','POST'])
+@login_required
+def addResult():
+    form = ResultForm()
+    if form.validate_on_submit():
+        resultData = Results(
+            robot_id = form.robot_id.data,
+            algorithm_id = form.algorithm_id.data,
+            time_taken = form.time_taken.data
+        )
+
+        db.session.add(resultData)
+        db.session.commit()
+        
+        return redirect(url_for('result'))
+    
+    else:
+        return render_template('add_result.html',title='Add result',form=form)        
 
 @app.route('/add_algorithm', methods=['GET','POST'])
 @login_required

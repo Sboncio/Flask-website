@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body_content %}
+    <p>A list of current test results in the database</p>
+    {% for result in results %}
+         <div>
+            <h3>Model Name: {{ result.robot.model_name }}</h3>
+            <h3>Algorithm Name: {{ result.algorithm.algorithm_name }} </h3>
+            <p>---------------------------------------------------</p>
+        </div>
+    {% endfor %}
+{% endblock %}

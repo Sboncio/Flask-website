@@ -1,5 +1,6 @@
 from application import db, login_manager
 from flask_login import UserMixin
+from datetime import datetime
 
 @login_manager.user_loader
 def load_user(id):
@@ -23,6 +24,7 @@ class Robots(db.Model):
     height = db.Column(db.Integer)
     width = db.Column(db.Integer)
     length = db.Column(db.Integer)
+    robotresult = db.relationship('Results',backref='robot', lazy=True)
 
     def __repr__(self):
         return ''.join([
@@ -33,9 +35,16 @@ class Algorithms(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     algorithm_name = db.Column(db.String(50), nullable=False, unique=True)
     movement_type = db.Column(db.String(50))
+    algorithmresult = db.relationship('Results',backref='algorithm', lazy=True)    
 
     def __repr__(self):
         return ''.join([
             'Algorithm name: ', self.algorithm_name, '\r\n',
             'Movement type: ', self.movement_type])
 
+class Results(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    robot_id = db.Column(db.Integer, db.ForeignKey('robots.id'), nullable=False)
+    algorithm_id = db.Column(db.Integer, db.ForeignKey('algorithms.id'), nullable=False)
+    time_taken = db.Column(db.Integer, nullable=False)
+    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
