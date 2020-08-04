@@ -131,6 +131,20 @@ def updateRobot(robot_id):
         
     return render_template('update_robot.html', title='Update Robot', form=form, robotID=robotModel.id)
 
+@app.route('/algorithm/delete/<int:algorithm_id>', methods=['GET','POST'])
+@login_required
+def deleteAlgorithm(algorithm_id):
+    algorithm = Algorithms.query.filter_by(id=algorithm_id).first()
+    count = Results.query.filter_by(algorithm_id=algorithm.id).count()
+    for i in range(count):
+        result = Results.query.filter_by(algorithm_id=algorithm.id).first()
+        db.session.delete(result)
+        db.session.commit()
+    db.session.delete(algorithm)
+    db.session.commit()
+
+    return redirect(url_for('algorithm'))
+
 @app.route('/robot/delete/<int:robot_id>', methods=['GET','POST'])
 @login_required
 def deleteRobot(robot_id):
