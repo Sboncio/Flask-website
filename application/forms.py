@@ -79,6 +79,27 @@ class RobotForm(FlaskForm):
 
     submit = SubmitField('Add!')
 
+class UpdateRobotForm(FlaskForm):
+    model_name = StringField('Model Name',
+        validators= [
+            DataRequired(),
+            Length(min=2, max=50)
+        ]
+    )
+
+    drive_type = StringField('Drive Type',
+        validators=[
+            DataRequired(),
+            Length(min=2,max=50)
+        ]
+    )
+
+    height = IntegerField('Height(mm)')
+    width = IntegerField('Width(mm)')
+    length = IntegerField('Length(mm)')
+
+    submit = SubmitField('Update!')
+
 class AlgorithmForm(FlaskForm):
     algorithm_name = StringField('Algorithm name',
         validators = [

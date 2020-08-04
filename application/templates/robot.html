@@ -3,11 +3,14 @@
     <p>A list of current robots in the database</p>
     {% for robot in robots %}
          <div>
-            <h2>{{ robot.model_name }}</h2>
+            <p><b>Model name:</b>{{ robot.model_name }}</p>
             <p><b>Drive type:</b> {{ robot.drive_type }}</p>
             <p><b>Height: </b> {{robot.height}}</p>
             <p><b>Width: </b> {{robot.width}}</p>
             <p><b>Length: </b> {{robot.length}}</p>
+            <form action="{{url_for('updateRobot', robot_id=robotID)}}">
+                <input type="submit" value="update">
+            </a>
             <p>-----------------------------------------</p>
         </div>
     {% endfor %}

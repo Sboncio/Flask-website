@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import Robots, Algorithms, Users, Results
-from application.forms import RobotForm, AlgorithmForm, RegistrationForm, LoginForm, ResultForm
+from application.forms import RobotForm, AlgorithmForm, RegistrationForm, LoginForm, ResultForm, UpdateRobotForm
 from flask_login import login_user, current_user,logout_user, login_required
 
 @app.route('/')
@@ -85,6 +85,33 @@ def addRobot():
         print(form.errors)
 
     return render_template('add_robot.html', title='Add Robot', form=form)
+
+@app.route('/update_robot/<int:robot_id>',methods=['GET', 'POST'])
+@login_required
+def updateRobot(robot_id):
+    form = UpdateRobotForm()
+    robotModel = Robots.query.filter_by(id=robot_id).first()
+    if form.validate_on_submit():
+        robotData = Robots(
+            model_name = form.model_name.data,
+            drive_type = form.drive_type.data,
+            height = form.height.data,
+            width = form.width.data,
+            length = form.length.data
+        )
+        db.session.commit()
+
+        return redirect(url_for('robot'))
+
+    elif request.method == 'GET':
+        form.model_name.data = robotModel.model_name
+        form.drive_type.data = robotModel.drive_type
+        form.height.data = robotModel.height
+        form.width.data = robotModel.width
+        form.length.data = robotModel.length
+        
+    return render_template('update_robot.html', title='Update Robot', form=form, robotID=robotModel.id)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
