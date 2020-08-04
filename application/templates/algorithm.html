@@ -5,6 +5,11 @@
          <div>
             <h2>{{ algorithm.algorithm_name }}</h2>
             <p><b>Movement type:</b> {{ algorithm.movement_type }}</p>
+            {% if current_user.is_authenticated %}
+                <a href="{{url_for('updateAlgorithm', algorithm_id=algorithm.id)}}">
+                    <input type="button" value="Update Algorithm">
+                </a>
+            {% endif %}
             <p>---------------------------------------------------</p>
         </div>
     {% endfor %}

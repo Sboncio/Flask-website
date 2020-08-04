@@ -116,6 +116,21 @@ class AlgorithmForm(FlaskForm):
     )
     submit = SubmitField('Add!')
 
+class UpdateAlgorithmForm(FlaskForm):
+    algorithm_name = StringField('Algorithm name',
+        validators = [
+            DataRequired(),
+            Length(min=2,max=50)
+        ]
+    )
+    movement_type = StringField('Movement Type',
+        validators = [
+            DataRequired(),
+            Length(min=2, max=50)
+        ]
+    )
+    submit = SubmitField('Update!')
+
 class ResultForm(FlaskForm):
     robot_id = SelectField()
     algorithm_id = SelectField()

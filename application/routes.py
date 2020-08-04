@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import Robots, Algorithms, Users, Results
-from application.forms import RobotForm, AlgorithmForm, RegistrationForm, LoginForm, ResultForm, UpdateRobotForm
+from application.forms import RobotForm, AlgorithmForm, RegistrationForm, LoginForm, ResultForm, UpdateRobotForm, UpdateAlgorithmForm
 from flask_login import login_user, current_user,logout_user, login_required
 
 @app.route('/')
@@ -61,7 +61,26 @@ def addAlgorithm():
     else:
         print(form.errors)
     return render_template('add_algorithm.html', title='Add Algorithm', form=form)
-    
+
+
+@app.route('/update_algorithm/<int:algorithm_id>',methods=['GET', 'POST'])
+@login_required
+def updateAlgorithm(algorithm_id):
+    form = UpdateAlgorithmForm()
+    currentAlgorithm = Algorithms.query.filter_by(id=algorithm_id).first()
+    if form.validate_on_submit():
+        currentAlgorithm.algorithm_name = form.algorithm_name.data,
+        currentAlgorithm.movement_type = form.movement_type.data
+
+        db.session.commit()
+
+        return redirect(url_for('algorithm'))
+
+    elif request.method == 'GET':
+        form.algorithm_name.data = currentAlgorithm.algorithm_name,
+        form.movement_type.data = currentAlgorithm.movement_type
+
+    return render_template('update_algorithm.html', title='Update Algorithm', form=form, AlgorithmID=currentAlgorithm.id)    
 
 @app.route('/add_robot', methods=['GET','POST'])
 @login_required
@@ -90,15 +109,15 @@ def addRobot():
 @login_required
 def updateRobot(robot_id):
     form = UpdateRobotForm()
+    print(robot_id)
     robotModel = Robots.query.filter_by(id=robot_id).first()
     if form.validate_on_submit():
-        robotData = Robots(
-            model_name = form.model_name.data,
-            drive_type = form.drive_type.data,
-            height = form.height.data,
-            width = form.width.data,
-            length = form.length.data
-        )
+        robotModel.model_name = form.model_name.data,
+        robotModel.drive_type = form.drive_type.data,
+        robotModel.height = form.height.data,
+        robotModel.width = form.width.data,
+        robotModel.length = form.length.data
+        
         db.session.commit()
 
         return redirect(url_for('robot'))
@@ -112,6 +131,19 @@ def updateRobot(robot_id):
         
     return render_template('update_robot.html', title='Update Robot', form=form, robotID=robotModel.id)
 
+@app.route('/robot/delete/<int:robot_id>', methods=['GET','POST'])
+@login_required
+def deleteRobot(robot_id):
+    robot = Robots.query.filter_by(id=robot_id).first()
+    count = Results.query.filter_by(robot_id=robot.id).count()
+    for i in range(count):
+        result = Results.query.filter_by(robot_id=robot.id).first()
+        db.session.delete(result)
+        db.session.commit()
+    db.session.delete(robot)
+    db.session.commit()
+
+    return redirect(url_for('robot'))    
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
