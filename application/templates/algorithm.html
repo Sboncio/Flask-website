@@ -9,6 +9,9 @@
                 <a href="{{url_for('updateAlgorithm', algorithm_id=algorithm.id)}}">
                     <input type="button" value="Update Algorithm">
                 </a>
+                <a href="{{url_for('deleteAlgorithm', algorithm_id=algorithm.id)}}">
+                    <input type="button" value="Delete Algorithm">
+                </a>
             {% endif %}
             <p>---------------------------------------------------</p>
         </div>
