@@ -1,0 +1,13 @@
+[Unit]
+Description=QASFIA1 Service
+
+[Service]
+User=jenkins
+WorkingDirectory=/opt/QASFIA1
+EnvironmentFile=/opt/QASFIA1/SFIA.env
+ExecStart=/bin/sh -c 'cd /opt/QASFIA1 && \
+        . ./venv/bin/activate && \
+        gunicorn --workers=4 --bind=0.0.0.0:5000 app:app'
+
+[Install]
+WantedBy=multi-user.target
