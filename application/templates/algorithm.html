@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block body_content %}
     <p>A list of current algorithms in the database</p>
+    {% if algorithms|length == 0 %}
+        <h2>No algorithms here</h2>
+    {% endif %}    
+
     {% for algorithm in algorithms %}
          <div>
             <h2>{{ algorithm.algorithm_name }}</h2>
