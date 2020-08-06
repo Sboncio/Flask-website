@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block body_content %}
     <p>A list of current robots in the database</p>
+    {% if robots|length == 0 %}
+        <h2>No robots here</h2>
+    {% endif %}
+
     {% for robot in robots %}
          <div>
             <p><b>Model name:</b>{{ robot.model_name }}</p>
