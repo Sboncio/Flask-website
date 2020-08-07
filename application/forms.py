@@ -133,7 +133,7 @@ class UpdateAlgorithmForm(FlaskForm):
 
 class ResultForm(FlaskForm):
     robot_id = SelectField(coerce=int)
-    algorithm_id = SelectField()
+    algorithm_id = SelectField(coerce=int)
     time_taken = IntegerField('Time taken(s)',
         validators=[
             DataRequired()
