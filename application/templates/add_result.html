@@ -5,9 +5,23 @@
             {{ form.hidden_tag() }}
             {{ form.robot_id.label }}
             {{ form.robot_id }}
+            {% if form.algorithm_id.errors %}
+                <div class="error">
+                    {% for error in form.algorithm_id.errors %}
+                        <span>{{ error }} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <br>
             {{ form.algorithm_id.label }}
             {{ form.algorithm_id }}
+            {% if form.algorithm_id.errors %}
+                <div class="error">
+                    {% for error in form.algorithm_id.errors %}
+                        <span>{{ error }} </span>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <br>
             {{ form.time_taken.label }}
             {{ form.time_taken }}
