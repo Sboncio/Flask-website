@@ -90,4 +90,14 @@ Representing the *Delete* portion of the CRUD acronym, testing that a record can
 The final portion of the CRUD acronym is the *Update* feature that allows an authorised user to make changes to an existing record in the database. Like the deletion testing, the code to create a record was included at the beginning of the test. Once a new entry was created, this record would then be updated. The relevant page would then be checked to ensure that the update had taken effect. 
 
 ## System Integration & Build
-github
+![alt text](assets/CI-pipeline.png "CI pipeline")
+Upon pushing source code to the git repository, the application should be tested before being deployed to a production server. As with the creation and testing areas of the application lifecycle, *Google Cloud Services* was used in this stage. Utilising Jenkins, an open source automation server, the previously discussed testing is automatically applied to the source code. Once the applied testing has passed successfully, it will trigger the deployment of the web application within jenkins.
+The deployment of the application was handled by the gunicorn application, as it provided a customisable number of workers and can provide a custom access port after the IP address. This application allows for the web application to be accessed through a web browser.
+
+
+
+
+
+
+
+
