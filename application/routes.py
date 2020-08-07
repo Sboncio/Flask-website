@@ -159,6 +159,14 @@ def deleteRobot(robot_id):
 
     return redirect(url_for('robot'))    
 
+@app.route('/result/delete/<int:result_id>',methods=['GET','POST'])
+@login_required
+def deleteResult(result_id):
+    result = Results.query.filter_by(id=result_id).first()
+    db.session.delete(result)
+    db.session.commit()
+    return redirect(url_for('result'))
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()

@@ -7,6 +7,11 @@
             <h3>Algorithm Name: {{ result.algorithm.algorithm_name }} </h3>
             <h4>Time Taken: {{ result.time_taken }} seconds </h4>
             <h5>Recorded by: {{result.author.first_name}} {{result.author.last_name}}</h5>
+            {% if current_user.is_authenticated %}
+                <a href="{{url_for('deleteResult', result_id=result.id)}}">
+                    <input type="button" value="Delete Result">
+                </a>
+            {% endif %}
             <p>---------------------------------------------------</p>
         </div>
     {% endfor %}
