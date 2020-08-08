@@ -95,9 +95,16 @@ Upon pushing source code to the git repository, the application should be tested
 The deployment of the application was handled by the gunicorn application, as it provided a customisable number of workers and can provide a custom access port after the IP address. This application allows for the web application to be accessed through a web browser.
 
 
+## Additional Information
+### Licence
+This software is licensed by GPLv3 (GNU General Public Licence Version 3). This licencing provides the following information:
 
+Nobody should be restricted by the software they use. There are four freedoms that every user should have:
 
+- the freedom to use the software for any purpose,
+- the freedom to change the software to suit your needs,
+- the freedom to share the software with your friends and neighbors, and
+- the freedom to share the changes you make.
 
-
-
-
+### Contributors
+The main contributor for this project was Samuel Asquith
