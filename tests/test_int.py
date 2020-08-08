@@ -114,4 +114,7 @@ class TestDeletion(TestBase):
         self.driver.find_element_by_xpath('/html/body/div/a[2]/input').click()
         response = self.driver.find_element_by_xpath("/html/body/h2")
         text = response.text        
-        assert 'No robots here' in text    
+        assert 'No robots here' in text
+
+
+      
