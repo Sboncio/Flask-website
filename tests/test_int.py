@@ -71,7 +71,7 @@ class TestRegistration(TestBase):
         time.sleep(6)
 
         # Assert that browser redirects to login page
-        assert url_for('login') in self.driver.current_url
+        assert url_for('register') in self.driver.current_url
 
 
 class TestDeletion(TestBase):
