@@ -74,8 +74,8 @@ class TestRegistration(TestBase):
         assert url_for('register') in self.driver.current_url
 
 
-class TestDeletion(TestBase):
-    def test_delete_robot(self):
+class TestNoItem(TestBase):
+    def test_no_robot(self):
         # Click register menu link
         self.driver.find_element_by_xpath("/html/body/a[5]").click()
         time.sleep(1)
@@ -101,17 +101,38 @@ class TestDeletion(TestBase):
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()        
         time.sleep(2)
 
-        self.driver.find_element_by_xpath('/html/body/a[6]').click()
-        self.driver.find_element_by_xpath('//*[@id="model_name"]').send_keys("Testbot")
-        self.driver.find_element_by_xpath('//*[@id="drive_type"]').send_keys("testdrive")
-        self.driver.find_element_by_xpath('//*[@id="height"]').send_keys("42")
-        self.driver.find_element_by_xpath('//*[@id="width"]').send_keys("42")
-        self.driver.find_element_by_xpath('//*[@id="length"]').send_keys("42")
+        self.driver.find_element_by_xpath('/html/body/a[2]').click()
+        response = self.driver.find_element_by_xpath("/html/body/h2")
+        text = response.text        
+        assert 'No robots here' in text
 
+    def test_no_algorithm(self):
+    # Click register menu link
+        self.driver.find_element_by_xpath("/html/body/a[5]").click()
+        time.sleep(1)
+
+        # Fill in registration form
+        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys(test_admin_email)
+        self.driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(
+            test_admin_first_name)
+        self.driver.find_element_by_xpath('//*[@id="last_name"]').send_keys(
+            test_admin_last_name)
+        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(
+            test_admin_password)
+        self.driver.find_element_by_xpath('//*[@id="confirm_password"]').send_keys(
+            test_admin_password)
+        self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+        time.sleep(1)
+
+        self.driver.find_element_by_xpath('/html/body/a[6]').click()
+        time.sleep(1)
+
+        self.driver.find_element_by_xpath('//*[@id="email"]').send_keys(test_admin_email)
+        self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
         self.driver.find_element_by_xpath('//*[@id="submit"]').click()
         time.sleep(2)
 
-        self.driver.find_element_by_xpath("/html/body/div/a[2]/input").click()
+        self.driver.find_element_by_xpath('/html/body/a[3]').click()
         response = self.driver.find_element_by_xpath("/html/body/h2")
-        text = response.text        
-        assert 'No robots here' in text    
+        text = response.text
+        assert 'No algorithms here' in text            

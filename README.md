@@ -54,7 +54,7 @@ Once the back-end and front-end of the application was completed, in-depth testi
 
 both of which utilising the pytest module to display the testing coverage and to create a testing report giving more detail to the tests.
 
-Overall, the two testing stages achieved a combined coverage of 95%.
+Overall, the two testing stages achieved a combined coverage of 94%.
  ![alt text](assets/coverage.PNG "PyTest coverage")
 ### Unit Testing
 The purpose of unit testing is to test small portions of the code in controlled environments. To organise these tests, categories were created in order to simplify the testing process. These categories include:
