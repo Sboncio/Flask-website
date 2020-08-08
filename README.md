@@ -92,15 +92,8 @@ The final portion of the CRUD acronym is the *Update* feature that allows an aut
 ## System Integration & Build
 ![alt text](assets/CI-pipeline.png "CI pipeline")
 Upon pushing source code to the git repository, the application should be tested before being deployed to a production server. As with the creation and testing areas of the application lifecycle, *Google Cloud Services* was used in this stage. Utilising Jenkins, an open source automation server, the previously discussed testing is automatically applied to the source code. Once the applied testing has passed successfully, it will trigger the deployment of the web application within jenkins.
-The deployment of the application was handled by the gunicorn application, as it provided a customisable number of workers and can provide a custom access port after the IP address. This application allows for the web application to be accessed through a web browser with multiple other users from different systems.
+The deployment of the application was handled by the gunicorn application, as it provided a customisable number of workers and can provide a custom access port after the IP address. This application allows for the web application to be accessed through a web browser.
 
-### Jenkins
-The Jenkins software allowed for automation in the process of testing and deployment for the application. Making use of github webhooks, the software was automatically pulled to the server and tested using pytest on the included tests. 
-Once the tests passed successfully, the deployment of the web application will begin automatically with gunicorn, allowing for the web application to be accessed.
-
-
-### Gunicorn
-Gunicorn (Green Unicorn), a Python Web Server Gateway Interface, allows for a web framework to be deployed. Gunicorn was used as its customisable number of workers allows for demand to be accomodated for. In addition, if one of the "workers" fails, a new one is deployed by the master controller. 
 
 
 

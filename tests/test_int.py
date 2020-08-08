@@ -136,3 +136,4 @@ class TestNoItem(TestBase):
         response = self.driver.find_element_by_xpath("/html/body/h2")
         text = response.text
         assert 'No algorithms here' in text            
+
